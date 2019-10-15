@@ -1,0 +1,46 @@
+apply plugin: 'com.android.library'
+apply plugin: 'realm-android'
+
+android {
+
+    def appConfig = rootProject.ext.android
+
+    compileSdkVersion appConfig.compileSdkVersion
+    buildToolsVersion appConfig.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion appConfig.minSdkVersion
+        targetSdkVersion appConfig.targetSdkVersion
+        //versionCode 1
+        //versionName "1.0"
+    }
+
+    repositories {
+        maven { url "https://jitpack.io" }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation rootProject.ext.dependencies["support-v4"]
+    //    compile rootProject.ext.dependencies["okhttp"]
+    implementation rootProject.ext.dependencies["okhttp-urlconnection"]
+    //    compile rootProject.ext.dependencies["okhttp-loggingInterceptor"]
+    implementation rootProject.ext.dependencies["persistentCookieJar"]
+    implementation rootProject.ext.dependencies["rxjava"]
+    implementation rootProject.ext.dependencies["rxandroid"]
+    implementation rootProject.ext.dependencies["retrofit2"]
+    implementation rootProject.ext.dependencies["retrofit2-rxjava"]
+    implementation rootProject.ext.dependencies["gson"]
+    implementation 'com.alibaba:fastjson:1.2.31'
+    // 精简版网络公共库
+    api project(':NetworkLite')
+}
+
